@@ -1,106 +1,164 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { GITHUB_USERNAME } from '../constants';
 import { useLanguage } from '../i18n';
+
+const Typewriter = ({ text, delay = 100 }: { text: string; delay?: number }) => {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset when text changes (e.g. language change)
+    setCurrentText('');
+    setCurrentIndex(0);
+  }, [text]);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setCurrentText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, delay);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, delay, text]);
+
+  return <span>{currentText}</span>;
+};
 
 export default function Hero() {
   const { t, language } = useLanguage();
 
   const handleDownloadCV = async () => {
-    const element = document.getElementById('cv-content');
-    if (!element) return;
-
-    // We can't import type here as it's a dynamic import
-    const html2pdf = (await import('html2pdf.js')).default;
-    
-    const opt = {
-      margin: 10,
-      filename: `Pedro_Chaves_CV_${language.toUpperCase()}.pdf`,
-      image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { 
-        scale: 2, 
-        useCORS: true,
-        letterRendering: true,
-        scrollX: 0,
-        scrollY: 0,
-        onclone: (doc: Document) => {
-          const style = doc.createElement('style');
-          style.innerHTML = `
-            :root {
-              /* Comprehensive hex fallbacks for Tailwind 4's default palette */
-              --color-slate-50: #f8fafc !important;
-              --color-slate-100: #f1f5f9 !important;
-              --color-slate-200: #e2e8f0 !important;
-              --color-slate-300: #cbd5e1 !important;
-              --color-slate-400: #94a3b8 !important;
-              --color-slate-500: #64748b !important;
-              --color-slate-600: #475569 !important;
-              --color-slate-700: #334155 !important;
-              --color-slate-800: #1e293b !important;
-              --color-slate-900: #0f172a !important;
-              --color-slate-950: #020617 !important;
-              
-              --color-indigo-50: #eef2ff !important;
-              --color-indigo-100: #e0e7ff !important;
-              --color-indigo-200: #c7d2fe !important;
-              --color-indigo-300: #a5b4fc !important;
-              --color-indigo-400: #818cf8 !important;
-              --color-indigo-500: #6366f1 !important;
-              --color-indigo-600: #4f46e5 !important;
-              --color-indigo-700: #4338ca !important;
-              --color-indigo-800: #3730a3 !important;
-              --color-indigo-900: #312e81 !important;
-              --color-indigo-950: #1e1b4b !important;
-
-              --color-accent: #4f46e5 !important;
-              --color-paper: #f8fafc !important;
-              --color-ink: #1e293b !important;
-              --color-surface: #ffffff !important;
-              
-              /* Force fallback for modern color functions */
-              --tw-ring-color: #c7d2fe !important;
-              --tw-shadow-color: rgba(0,0,0,0.1) !important;
-            }
-            body {
-              background-color: #f8fafc !important;
-              color: #1e293b !important;
-            }
-            /* Hide problematic animations that might use oklch/oklab in keyframes */
-            * {
-              animation: none !important;
-              transition: none !important;
-            }
-          `;
-          doc.head.appendChild(style);
-
-          // Remove oklch/oklab from any style attributes on elements
-          const all = doc.querySelectorAll('*');
-          all.forEach((el) => {
-            const htmlEl = el as HTMLElement;
-            if (htmlEl.style) {
-              if (htmlEl.style.color && (htmlEl.style.color.includes('oklch') || htmlEl.style.color.includes('oklab'))) {
-                htmlEl.style.color = '';
-              }
-              if (htmlEl.style.backgroundColor && (htmlEl.style.backgroundColor.includes('oklch') || htmlEl.style.backgroundColor.includes('oklab'))) {
-                htmlEl.style.backgroundColor = '';
-              }
-              if (htmlEl.style.borderColor && (htmlEl.style.borderColor.includes('oklch') || htmlEl.style.borderColor.includes('oklab'))) {
-                htmlEl.style.borderColor = '';
-              }
-            }
-          });
-        }
-      },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
-      pagebreak: { mode: ['avoid-all' as const, 'css' as const, 'legacy' as const] }
+    // Helper to convert image URL to base64
+    const getBase64FromUrl = async (url: string): Promise<string | null> => {
+      try {
+        const response = await fetch(url, { mode: 'cors' });
+        const blob = await response.blob();
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.readAsDataURL(blob);
+        });
+      } catch (e) {
+        console.error('Base64 conversion failed:', e);
+        return null;
+      }
     };
 
-    // To prevent the "View Portfolio" and "Download CV" buttons from appearing in the PDF,
-    // we can temporarily hide them or just accept that they are part of the "site PDF"
-    // However, the user asked for a "PDF version of the site", so we'll keep them but maybe simplify.
+    const proxyImageUrl = `https://images.weserv.nl/?url=github.com/${GITHUB_USERNAME}.png&w=200&h=200&fit=cover&default=identicon`;
+    const base64Image = await getBase64FromUrl(proxyImageUrl);
+
+    const html2pdf = (await import('html2pdf.js')).default;
+    
+    // Construct a simplified but more polished HTML content for the CV
+    const cvHtml = `
+      <div style="font-family: 'Helvetica', 'Arial', sans-serif; color: #1e293b; padding: 40px 50px; line-height: 1.5; background: white;">
+        <!-- Header with Photo -->
+        <div style="display: flex; align-items: center; gap: 24px; border-bottom: 2px solid #6366f1; padding-bottom: 24px; margin-bottom: 32px;">
+          ${base64Image ? `<img src="${base64Image}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #eef2ff;" />` : ''}
+          <div>
+            <h1 style="font-size: 32px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1;">Pedro Chaves</h1>
+            <p style="font-size: 18px; font-weight: 600; color: #4f46e5; margin: 6px 0 0 0;">Technical Lead</p>
+            <div style="display: flex; gap: 16px; font-size: 12px; color: #64748b; margin-top: 8px;">
+              <span>${t('hero_location')}</span>
+              <span>•</span>
+              <span>pedrochaves86@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div style="margin-bottom: 32px;">
+          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 12px;">Summary</h2>
+          <p style="font-size: 13px; color: #334155; text-align: justify; margin: 0;">
+            ${t('hero_desc')} ${t('about_me_p1')}
+          </p>
+        </div>
+
+        <!-- Experience Section with Timeline -->
+        <div style="margin-bottom: 32px;">
+          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 20px;">Experience</h2>
+          
+          <div style="position: relative; padding-left: 24px; border-left: 2px solid #f1f5f9;">
+            <!-- EDP Role -->
+            <div style="position: relative; margin-bottom: 28px;">
+              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #6366f1; border-radius: 50%; border: 3px solid white;"></div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Technical Lead @ EDP</h3>
+                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_sep')} 2021 - ${t('exp_present')}</span>
+              </div>
+              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_edp')}</p>
+              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
+                ${['Angular', 'TypeScript', 'Java', 'PHP', 'GCP', 'SonarQube', 'Robot Framework'].map(skill => `
+                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Natixis Role -->
+            <div style="position: relative; margin-bottom: 28px;">
+              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; border: 3px solid white;"></div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Angular Developer @ Natixis</h3>
+                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_aug')} 2019 - ${t('exp_jul')} 2021</span>
+              </div>
+              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_natixis')}</p>
+              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
+                ${['Angular', 'TypeScript', 'SCSS', 'Jasmine', 'SonarQube', 'Bitbucket'].map(skill => `
+                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- PMA Role -->
+            <div style="position: relative; margin-bottom: 0;">
+              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; border: 3px solid white;"></div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Laravel Developer | IT Manager @ PMA</h3>
+                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_jun')} 2016 - ${t('exp_apr')} 2019</span>
+              </div>
+              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_pmacores')}</p>
+              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
+                ${['Laravel', 'PHP', 'MySQL', 'SQL', 'System Administration'].map(skill => `
+                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div style="margin-bottom: 32px;">
+          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 16px;">Core Skills</h2>
+          <div style="display: block; margin-right: -4px;">
+            ${['Technical Leadership', 'Software Architecture', 'Angular', 'GCP', 'Java', 'PHP', 'Clean Code', 'CI/CD'].map(skill => `
+              <div style="display: inline-block; background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 0 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-right: 8px; margin-bottom: 8px; text-align: center; line-height: 26px; height: 26px; vertical-align: middle;">${skill}</div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 40px; text-align: center;">
+          <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 8px;">
+            <span style="color: #64748b; font-size: 10px; font-weight: 600;">linkedin.com/in/pedrochaves86</span>
+            <span style="color: #64748b; font-size: 10px; font-weight: 600;">github.com/pedrochaves86</span>
+          </div>
+          <p style="color: #94a3b8; font-size: 9px; margin: 0;">${language === 'pt' ? 'Documento gerado digitalmente' : 'Digitally generated document'}</p>
+        </div>
+      </div>
+    `;
+
+    const opt = {
+      margin: 0,
+      filename: `Pedro_Chaves_CV_${language.toUpperCase()}.pdf`,
+      image: { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const }
+    };
     
     try {
-      await html2pdf().set(opt).from(element).save();
+      await html2pdf().from(cvHtml).set(opt).save();
     } catch (error) {
       console.error('Error generating PDF:', error);
     }
@@ -114,10 +172,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="badge mb-4">{t('status_available')}</span>
             <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-              {t('hero_title_main')}<br />
-              <span className="text-accent underline decoration-indigo-200 underline-offset-8">{t('hero_title_accent')}</span>.
+              <span className="text-accent underline decoration-indigo-200 underline-offset-8">
+                <Typewriter text={t('hero_title_accent')} delay={100} />
+                <span className="animate-pulse">|</span>
+              </span>.
             </h1>
           </motion.div>
           
@@ -159,10 +218,10 @@ export default function Hero() {
         >
           <div className="aspect-square bg-slate-100 rounded-full overflow-hidden ring-8 ring-slate-50/50 shadow-2xl">
             <img 
-              src={`https://github.com/${GITHUB_USERNAME}.png`} 
+              src={`https://images.weserv.nl/?url=github.com/${GITHUB_USERNAME}.png&w=400&h=400&fit=cover&default=identicon`}
               alt="Pedro Chaves" 
               className="w-full h-full object-cover transition-all duration-700"
-              referrerPolicy="no-referrer"
+              crossOrigin="anonymous"
             />
           </div>
           <motion.a 
