@@ -11,7 +11,7 @@ export default function App() {
     <LanguageProvider>
       <div className="min-h-screen">
         <Header />
-        <main>
+        <main id="cv-content">
           <Hero />
           <AboutMe />
           <About />
