@@ -24,7 +24,7 @@ export default function Footer() {
           
           <div className="space-y-4">
             <a 
-              href="mailto:PedroChaves86@gmail.com" 
+              href="mailto:pedrochaves86@gmail.com" 
               className="group flex items-center justify-between p-8 bg-slate-50 border border-slate-100 rounded-3xl hover:bg-white hover:border-accent hover:shadow-xl hover:shadow-indigo-50 transition-all"
             >
               <div className="flex items-center gap-6">
@@ -33,7 +33,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-widest block mb-1 text-slate-400">Direct Email</span>
-                  <span className="text-xl font-bold text-slate-900">PedroChaves86@gmail.com</span>
+                  <span className="text-xl font-bold text-slate-900">pedrochaves86@gmail.com</span>
                 </div>
               </div>
               <ArrowRight className="text-slate-300 group-hover:text-accent transition-colors" />

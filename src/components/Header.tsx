@@ -21,8 +21,8 @@ export default function Header() {
           className="flex items-center space-x-3 cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-100">
-            P
+          <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-lg shadow-indigo-100 uppercase tracking-tighter">
+            PC
           </div>
           <span className="text-lg font-bold tracking-tight text-slate-900 hidden sm:block">PEDRO CHAVES</span>
         </motion.div>

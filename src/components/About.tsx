@@ -3,10 +3,10 @@ import { Target, Zap, Heart, Database, Briefcase } from 'lucide-react';
 
 export default function About() {
   const skills = [
-    { icon: <Zap size={18} />, title: 'Frontend', desc: 'React, TypeScript, Tailwind' },
-    { icon: <Database size={18} />, title: 'Backend', desc: 'Node.js, Python, PostgreSQL' },
-    { icon: <Target size={18} />, title: 'Arch', desc: 'System Design, Scalability' },
-    { icon: <Heart size={18} />, title: 'UX', desc: 'User-centric, Accessible UI' },
+    { icon: <Zap size={18} />, title: 'Frontend', desc: 'Angular 15+, TypeScript, RxJS' },
+    { icon: <Database size={18} />, title: 'Backend', desc: 'Java 17, PHP 8.2, SQL' },
+    { icon: <Target size={18} />, title: 'Arch', desc: 'GCP, CI/CD, System Design' },
+    { icon: <Heart size={18} />, title: 'UX', desc: 'Design Systems, UI Alignment' },
   ];
 
   return (
@@ -99,7 +99,12 @@ export default function About() {
                         <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1 block">Jun 2017 &mdash; Jul 2020</span>
                         <h4 className="font-bold text-slate-900 text-sm">PMAçores</h4>
                         <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Angular Developer</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium">Developed a new ERP system replacing legacy applications and introduced frontend engineering best practices.</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Developed a new ERP system replacing legacy applications and introduced frontend engineering best practices.</p>
+                        <div className="flex flex-wrap gap-1">
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-300 font-bold uppercase">Angular 7+</span>
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-300 font-bold uppercase">TypeScript</span>
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-300 font-bold uppercase">SQL</span>
+                        </div>
                     </div>
 
                     <div className="relative pl-8 border-l-2 border-slate-50">
@@ -107,7 +112,12 @@ export default function About() {
                         <span className="text-[10px] font-bold text-slate-200 uppercase tracking-widest mb-1 block">Apr 2014 &mdash; May 2017</span>
                         <h4 className="font-bold text-slate-900 text-sm">NOS Açores</h4>
                         <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Laravel Developer | IT Manager</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium">Built internal platforms for documentation and reporting using Laravel and PHP.</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Built internal platforms for documentation and reporting using Laravel and PHP.</p>
+                        <div className="flex flex-wrap gap-1">
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-200 font-bold uppercase">Laravel 5</span>
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-200 font-bold uppercase">PHP</span>
+                            <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-200 font-bold uppercase">SQL</span>
+                        </div>
                     </div>
                 </div>
             </motion.div>
