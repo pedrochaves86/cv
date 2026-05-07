@@ -78,7 +78,7 @@ export default function Projects() {
                     </h4>
                 </div>
                 
-                <p className="text-xs text-slate-500 mb-6 line-clamp-2 h-8 leading-relaxed font-medium">
+                <p className="text-xs text-slate-500 mb-6 line-clamp-3 min-h-[3.75rem] leading-relaxed font-medium">
                     {repo.description || t('portfolio_default_desc')}
                 </p>
 

@@ -30,7 +30,7 @@ const translations: Translations = {
   about_me_label: { en: '01. About Me', pt: '01. Sobre Mim' },
   about_me_title: { en: 'Beyond the', pt: 'Para além da' },
   about_me_stack: { en: 'Technical Stack.', pt: 'Stack Técnica.' },
-  about_me_quote: { en: '"I genuinely enjoy building systems that are clean, scalable, and built to last. I value clarity, ownership, and a positive working environment."', pt: '"Gosto genuinamente de construir sistemas limpos, escaláveis e feitos para durar. Valorizo clareza, responsabilidade (ownership) e um ambiente de trabalho positivo."' },
+  about_me_quote: { en: '"I genuinely enjoy building systems that are clean, scalable, and built to last. I value clarity, ownership, and a positive working environment."', pt: '"Gosto genuinamente de construir sistemas limpos, escaláveis e feitos para durar. Valorizo clareza, responsabilidade e um ambiente de trabalho positivo."' },
   about_me_p1: { 
     en: 'Hi, I’m Pedro — a tech lead who enjoys turning complex problems into simple, well-structured solutions. I work mostly with Angular, Java, PHP, and cloud technologies, and I genuinely enjoy building systems that are clean, scalable, and built to last.', 
     pt: 'Olá, sou o Pedro — um Technical Lead que gosta de transformar problemas complexos em soluções simples e bem estruturadas. Trabalho maioritariamente com Angular, Java, PHP e tecnologias cloud, e gosto genuinamente de construir sistemas limpos, escaláveis e feitos para durar.' 
