@@ -43,7 +43,7 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-end mb-10 border-b border-slate-200 pb-8">
           <div>
-            <span className="section-label">02. Open Source</span>
+            <span className="section-label">03. Portfolio</span>
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">GitHub Repositories</h2>
           </div>
           <a 

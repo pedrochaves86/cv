@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20">
           <div>
-            <span className="section-label">03. Contact</span>
+            <span className="section-label">04. Contact</span>
             <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 leading-tight">
                 Let's Build <br />
                 <span className="text-accent">Something Great.</span>

@@ -20,7 +20,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="section-label">01. Biography</span>
+            <span className="section-label">02. Experience</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
                 Engineering <br />
                 <span className="text-accent underline decoration-indigo-100 underline-offset-4">Mission-Critical Systems.</span>
