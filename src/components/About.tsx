@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { Target, Zap, Heart, Database, Briefcase } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 export default function About() {
+  const { t } = useLanguage();
+
   const skills = [
     { icon: <Zap size={18} />, title: 'Frontend', desc: 'Angular 15+, TypeScript, RxJS' },
     { icon: <Database size={18} />, title: 'Backend', desc: 'Java 17, PHP 8.2, SQL' },
@@ -20,18 +23,18 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="section-label">02. Experience</span>
+            <span className="section-label">{t('exp_label')}</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
-                Engineering <br />
-                <span className="text-accent underline decoration-indigo-100 underline-offset-4">Mission-Critical Systems.</span>
+                {t('exp_title_main')} <br />
+                <span className="text-accent underline decoration-indigo-200 underline-offset-4">{t('exp_title_accent')}</span>
             </h2>
             
             <div className="space-y-6 text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
               <p>
-                As a <span className="text-slate-900 font-bold">Technical Lead at EDP</span>, I specialize in transforming complex business requirements into efficient, scalable, and reliable engineering solutions. 
+                {t('exp_p1')}
               </p>
               <p>
-                My background spans the full application lifecycle—from architectural design and CI/CD implementation to platform governance and performance optimization. I act as a bridge between development teams and business stakeholders to ensure technical excellence.
+                {t('exp_p2')}
               </p>
             </div>
 
@@ -63,17 +66,17 @@ export default function About() {
                 className="card p-8 md:p-10"
             >
                 <div className="flex items-center justify-between mb-10 border-b border-slate-100 pb-6">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900">Experience</h3>
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-slate-900">{t('exp_timeline_title')}</h3>
                     <Briefcase size={16} className="text-slate-300" />
                 </div>
                 
                 <div className="space-y-10">
                     <div className="relative pl-8 border-l-2 border-accent">
                         <div className="absolute top-0 left-[-6px] w-[10px] h-[10px] rounded-full bg-accent ring-4 ring-indigo-50" />
-                        <span className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 block">Sep 2021 &mdash; Present</span>
+                        <span className="text-[10px] font-bold text-accent uppercase tracking-widest mb-1 block">{t('exp_sep')} 2021 &mdash; {t('exp_present')}</span>
                         <h4 className="font-bold text-slate-900 text-sm">EDP</h4>
-                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Technical Lead</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Technical leadership of critical applications, ensuring performance, security and architectural integrity.</p>
+                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">{t('role_tech_lead')}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">{t('desc_edp')}</p>
                         <div className="flex flex-wrap gap-1">
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500 font-bold uppercase">Angular 15+</span>
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-500 font-bold uppercase">Java 17</span>
@@ -84,10 +87,10 @@ export default function About() {
 
                     <div className="relative pl-8 border-l-2 border-slate-200">
                         <div className="absolute top-0 left-[-6px] w-[10px] h-[10px] rounded-full bg-slate-200" />
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">Jul 2020 &mdash; Aug 2021</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 block">{t('exp_jul')} 2020 &mdash; {t('exp_aug')} 2021</span>
                         <h4 className="font-bold text-slate-900 text-sm">Natixis in Portugal</h4>
-                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Angular Developer</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Developed reusable Angular components and supported UX/UI alignment for global engineering teams.</p>
+                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">{t('role_angular_dev')}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">{t('desc_natixis')}</p>
                         <div className="flex flex-wrap gap-1">
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-400 font-bold uppercase">Angular 10+</span>
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-400 font-bold uppercase">TypeScript</span>
@@ -96,10 +99,10 @@ export default function About() {
 
                     <div className="relative pl-8 border-l-2 border-slate-100">
                         <div className="absolute top-0 left-[-6px] w-[10px] h-[10px] rounded-full bg-slate-100" />
-                        <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1 block">Jun 2017 &mdash; Jul 2020</span>
+                        <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest mb-1 block">{t('exp_jun')} 2017 &mdash; {t('exp_jul')} 2020</span>
                         <h4 className="font-bold text-slate-900 text-sm">PMAçores</h4>
-                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Angular Developer</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Developed a new ERP system replacing legacy applications and introduced frontend engineering best practices.</p>
+                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">{t('role_angular_dev')}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">{t('desc_pmacores')}</p>
                         <div className="flex flex-wrap gap-1">
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-300 font-bold uppercase">Angular 7+</span>
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-300 font-bold uppercase">TypeScript</span>
@@ -109,10 +112,10 @@ export default function About() {
 
                     <div className="relative pl-8 border-l-2 border-slate-50">
                         <div className="absolute top-0 left-[-6px] w-[10px] h-[10px] rounded-full bg-slate-50" />
-                        <span className="text-[10px] font-bold text-slate-200 uppercase tracking-widest mb-1 block">Apr 2014 &mdash; May 2017</span>
+                        <span className="text-[10px] font-bold text-slate-200 uppercase tracking-widest mb-1 block">{t('exp_apr')} 2014 &mdash; {t('exp_may')} 2017</span>
                         <h4 className="font-bold text-slate-900 text-sm">NOS Açores</h4>
-                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">Laravel Developer | IT Manager</p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">Built internal platforms for documentation and reporting using Laravel and PHP.</p>
+                        <p className="text-xs text-slate-400 font-medium mb-3 italic leading-none">{t('role_laravel_it')}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed font-medium mb-2">{t('desc_nos')}</p>
                         <div className="flex flex-wrap gap-1">
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-200 font-bold uppercase">Laravel 5</span>
                             <span className="text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-200 font-bold uppercase">PHP</span>

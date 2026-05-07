@@ -1,8 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
 import { GITHUB_USERNAME } from '../constants';
+import { useLanguage } from '../i18n';
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative pt-32 pb-20 px-6 border-b border-slate-200 bg-white">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
@@ -11,15 +14,15 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="badge mb-4">Available for tech leadership & strategic roles</span>
+            <span className="badge mb-4">{t('status_available')}</span>
             <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-              Technical<br />
-              <span className="text-accent underline decoration-indigo-200 underline-offset-8">Lead</span>.
+              {t('hero_title_main')}<br />
+              <span className="text-accent underline decoration-indigo-200 underline-offset-8">{t('hero_title_accent')}</span>.
             </h1>
           </motion.div>
           
           <p className="text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed">
-            Leading engineering teams and architecture for business-critical applications. Specialized in Angular, Java, PHP & Cloud (GCP) with a focus on software quality and technical sustainability.
+            {t('hero_desc')}
           </p>
           
           <div className="flex flex-wrap items-center gap-4">
@@ -28,7 +31,7 @@ export default function Hero() {
               whileHover={{ y: -2 }}
               className="px-8 py-3.5 bg-accent text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all"
             >
-              View Portfolio
+              {t('hero_cta_portfolio')}
               <ArrowRight size={18} />
             </motion.a>
             <motion.a 
@@ -37,14 +40,14 @@ export default function Hero() {
               className="px-8 py-3.5 border border-slate-200 rounded-full font-bold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-2"
             >
               <Download size={18} />
-              Download CV
+              {t('hero_cta_cv')}
             </motion.a>
           </div>
 
           <div className="flex items-center gap-6 pt-4 border-t border-slate-100">
             <div className="flex items-center gap-2 text-slate-400">
               <MapPin size={16} />
-              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Ponta Delgada, Portugal</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{t('hero_location')}</span>
             </div>
           </div>
         </div>
@@ -78,8 +81,8 @@ export default function Hero() {
                     ))}
                 </div>
                 <div>
-                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">Collaborations</p>
-                    <p className="text-xs font-black text-slate-900 leading-none">+12 Projects</p>
+                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">{t('hero_collaborations')}</p>
+                    <p className="text-xs font-black text-slate-900 leading-none">{t('hero_projects_count')}</p>
                 </div>
             </div>
           </motion.a>

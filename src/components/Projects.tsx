@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ExternalLink, Star, Folder } from 'lucide-react';
 import { Repo } from '@/src/types';
 import { GITHUB_USERNAME } from '@/src/constants';
+import { useLanguage } from '../i18n';
 
 const LANGUAGE_COLORS: Record<string, string> = {
   TypeScript: 'bg-blue-500',
@@ -16,6 +17,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
 export default function Projects() {
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useLanguage();
 
   useEffect(() => {
     async function fetchRepos() {
@@ -34,7 +36,7 @@ export default function Projects() {
 
   if (loading) return (
     <div className="py-24 text-center section-label text-slate-300">
-      Fetching Repositories...
+      {t('portfolio_fetching')}
     </div>
   );
 
@@ -43,8 +45,8 @@ export default function Projects() {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-end mb-10 border-b border-slate-200 pb-8">
           <div>
-            <span className="section-label">03. Portfolio</span>
-            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">GitHub Repositories</h2>
+            <span className="section-label">{t('portfolio_label')}</span>
+            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">{t('portfolio_title')}</h2>
           </div>
           <a 
             href={`https://github.com/${GITHUB_USERNAME}`} 
@@ -77,7 +79,7 @@ export default function Projects() {
                 </div>
                 
                 <p className="text-xs text-slate-500 mb-6 line-clamp-2 h-8 leading-relaxed font-medium">
-                    {repo.description || 'Modern tool built for high performance and clean architecture.'}
+                    {repo.description || t('portfolio_default_desc')}
                 </p>
 
                 <div className="mt-auto flex items-center justify-between">
@@ -85,7 +87,7 @@ export default function Projects() {
                         <div className="flex items-center gap-2">
                             <div className={`w-2 h-2 rounded-full ${LANGUAGE_COLORS[repo.language || ''] || 'bg-slate-300'}`} />
                             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                                {repo.language || 'Mixed'}
+                                {repo.language || t('portfolio_mixed')}
                             </span>
                         </div>
                         {repo.stargazers_count > 0 && (

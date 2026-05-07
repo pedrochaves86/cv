@@ -4,18 +4,21 @@ import AboutMe from './components/AboutMe';
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
+import { LanguageProvider } from './i18n';
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <main>
-        <Hero />
-        <AboutMe />
-        <About />
-        <Projects />
-      </main>
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen">
+        <Header />
+        <main>
+          <Hero />
+          <AboutMe />
+          <About />
+          <Projects />
+        </main>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }

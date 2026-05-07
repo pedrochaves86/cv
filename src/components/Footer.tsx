@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
 import { Mail, Github, Linkedin, ArrowUp, ArrowRight } from 'lucide-react';
 import { GITHUB_URL, LINKEDIN_URL } from '@/src/constants';
+import { useLanguage } from '../i18n';
 
 export default function Footer() {
+  const { t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -12,13 +14,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20">
           <div>
-            <span className="section-label">04. Contact</span>
+            <span className="section-label">{t('contact_label')}</span>
             <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 leading-tight">
-                Let's Build <br />
-                <span className="text-accent">Something Great.</span>
+                {t('contact_title_1')} <br />
+                <span className="text-accent">{t('contact_title_2')}</span>
             </h2>
             <p className="text-lg text-slate-500 max-w-md leading-relaxed">
-              Always open to discussing new architectural challenges, creative ideas or strategic opportunities.
+              {t('contact_desc')}
             </p>
           </div>
           
@@ -32,7 +34,7 @@ export default function Footer() {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest block mb-1 text-slate-400">Direct Email</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest block mb-1 text-slate-400">{t('contact_direct_email')}</span>
                   <span className="text-xl font-bold text-slate-900">pedrochaves86@gmail.com</span>
                 </div>
               </div>
@@ -72,7 +74,7 @@ export default function Footer() {
             onClick={scrollToTop}
             className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-slate-900"
           >
-            Back to top
+            {t('contact_back_top')}
             <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-accent">
                 <ArrowUp size={14} />
             </div>

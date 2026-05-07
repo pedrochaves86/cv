@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 export default function AboutMe() {
+  const { t } = useLanguage();
+
   return (
     <section id="about-me" className="py-24 px-6 bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto">
@@ -14,16 +17,16 @@ export default function AboutMe() {
             className="lg:col-span-5 relative"
           >
             <div className="relative z-10">
-              <span className="section-label mb-6">01. About Me</span>
+              <span className="section-label mb-6">{t('about_me_label')}</span>
               <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
-                Beyond the <br />
-                <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight">Technical Stack.</span>
+                {t('about_me_title')} <br />
+                <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight">{t('about_me_stack')}</span>
               </h2>
               
               <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 relative overflow-hidden group">
                 <Quote className="absolute -top-4 -right-4 w-24 h-24 text-slate-200/50 group-hover:text-accent/10 transition-colors" />
                 <p className="text-slate-600 italic relative z-10 leading-relaxed">
-                  "I genuinely enjoy building systems that are clean, scalable, and built to last. I value clarity, ownership, and a positive working environment."
+                  {t('about_me_quote')}
                 </p>
                 <div className="mt-4 flex items-center gap-3">
                     <div className="w-8 h-1 bg-accent rounded-full" />
@@ -43,21 +46,21 @@ export default function AboutMe() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-7"
           >
-            <div className="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed">
+            <div className="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed text-justify">
               <p>
-                Hi, I’m <span className="text-slate-900 font-bold">Pedro</span> — a tech lead who enjoys turning complex problems into simple, well-structured solutions. I work mostly with Angular, Java, PHP, and cloud technologies, and I genuinely enjoy building systems that are clean, scalable, and built to last.
+                {t('about_me_p1')}
               </p>
               <p>
-                I like to combine technical depth with a practical mindset. For me, good software isn’t just about writing code — it’s about making thoughtful decisions, supporting the team, and creating solutions that make sense in the real world. I value clarity, ownership, and a positive working environment where people can grow and collaborate.
+                {t('about_me_p2')}
               </p>
               <p>
-                I’m based in the <span className="text-slate-900 font-bold">Azores</span>, which probably explains why I enjoy being outdoors as much as being behind a screen. In my free time, you’ll usually find me hiking scenic trails, taking part in trail running events, or training at the gym. I like challenges — whether they involve elevation gain or a production deployment.
+                {t('about_me_p3')}
               </p>
               <p>
-                Curious by nature and optimistic by default, I’m always looking for ways to improve, learn something new, and build things that matter.
+                {t('about_me_p4')}
               </p>
               <p className="font-medium text-slate-900">
-                If you’re into clean architecture, continuous improvement, and working with someone who brings both focus and good energy to the table — we’ll get along just fine.
+                {t('about_me_p5')}
               </p>
             </div>
           </motion.div>
