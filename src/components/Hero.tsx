@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Download, MapPin } from 'lucide-react';
+import { GITHUB_USERNAME } from '../constants';
 
 export default function Hero() {
   return (
@@ -55,9 +56,10 @@ export default function Hero() {
         >
           <div className="aspect-square bg-slate-100 rounded-3xl overflow-hidden ring-8 ring-slate-50/50">
             <img 
-              src="https://avatars.githubusercontent.com/u/10223040?v=4" 
+              src={`https://github.com/${GITHUB_USERNAME}.png`} 
               alt="Pedro Chaves" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              referrerPolicy="no-referrer"
             />
           </div>
           <div className="absolute -bottom-6 -right-6 p-6 bg-white rounded-2xl shadow-xl border border-slate-100 hidden sm:block">
