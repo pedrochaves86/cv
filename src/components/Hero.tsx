@@ -1,0 +1,80 @@
+import { motion } from 'motion/react';
+import { ArrowRight, Download, MapPin } from 'lucide-react';
+
+export default function Hero() {
+  return (
+    <section className="relative pt-32 pb-20 px-6 border-b border-slate-200 bg-white">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+        <div className="flex-1 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <span className="badge mb-4">Available for tech leadership & strategic roles</span>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+              Technical<br />
+              <span className="text-accent underline decoration-indigo-200 underline-offset-8">Lead</span>.
+            </h1>
+          </motion.div>
+          
+          <p className="text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed">
+            Leading engineering teams and architecture for business-critical applications. Specialized in Angular, Java, PHP & Cloud (GCP) with a focus on software quality and technical sustainability.
+          </p>
+          
+          <div className="flex flex-wrap items-center gap-4">
+            <motion.a 
+              href="#projects"
+              whileHover={{ y: -2 }}
+              className="px-8 py-3.5 bg-accent text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all"
+            >
+              View Portfolio
+              <ArrowRight size={18} />
+            </motion.a>
+            <motion.a 
+              href="#"
+              whileHover={{ y: -2 }}
+              className="px-8 py-3.5 border border-slate-200 rounded-full font-bold text-slate-700 hover:bg-slate-50 transition-all flex items-center gap-2"
+            >
+              <Download size={18} />
+              Download CV
+            </motion.a>
+          </div>
+
+          <div className="flex items-center gap-6 pt-4 border-t border-slate-100">
+            <div className="flex items-center gap-2 text-slate-400">
+              <MapPin size={16} />
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Ponta Delgada, Portugal</span>
+            </div>
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative lg:w-[400px]"
+        >
+          <div className="aspect-square bg-slate-100 rounded-3xl overflow-hidden ring-8 ring-slate-50/50">
+            <img 
+              src="https://avatars.githubusercontent.com/u/10223040?v=4" 
+              alt="Pedro Chaves" 
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </div>
+          <div className="absolute -bottom-6 -right-6 p-6 bg-white rounded-2xl shadow-xl border border-slate-100 hidden sm:block">
+            <div className="flex items-center gap-4">
+                <div className="flex -space-x-2">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200" />
+                    ))}
+                </div>
+                <div>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Collaborations</p>
+                    <p className="text-sm font-bold text-slate-900 leading-none">+12 Projects</p>
+                </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
