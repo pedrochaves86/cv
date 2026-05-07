@@ -52,29 +52,37 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="relative lg:w-[400px]"
+          className="relative lg:w-[320px]"
         >
-          <div className="aspect-square bg-slate-100 rounded-3xl overflow-hidden ring-8 ring-slate-50/50">
+          <div className="aspect-square bg-slate-100 rounded-full overflow-hidden ring-8 ring-slate-50/50 shadow-2xl">
             <img 
               src={`https://github.com/${GITHUB_USERNAME}.png`} 
               alt="Pedro Chaves" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-full h-full object-cover transition-all duration-700"
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="absolute -bottom-6 -right-6 p-6 bg-white rounded-2xl shadow-xl border border-slate-100 hidden sm:block">
-            <div className="flex items-center gap-4">
-                <div className="flex -space-x-2">
+          <motion.a 
+            href={`https://github.com/${GITHUB_USERNAME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            className="absolute -bottom-4 -right-2 p-3.5 bg-white rounded-2xl shadow-2xl border border-slate-100 hidden sm:block hover:border-accent/20 transition-all"
+          >
+            <div className="flex items-center gap-3">
+                <div className="flex -space-x-1.5">
                     {[1, 2, 3].map(i => (
-                        <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200" />
+                        <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center overflow-hidden">
+                           <div className="w-full h-full bg-slate-200" />
+                        </div>
                     ))}
                 </div>
                 <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Collaborations</p>
-                    <p className="text-sm font-bold text-slate-900 leading-none">+12 Projects</p>
+                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">Collaborations</p>
+                    <p className="text-xs font-black text-slate-900 leading-none">+12 Projects</p>
                 </div>
             </div>
-          </div>
+          </motion.a>
         </motion.div>
       </div>
     </section>
