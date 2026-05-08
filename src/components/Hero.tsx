@@ -4,164 +4,50 @@ import { useState, useEffect } from 'react';
 import { GITHUB_USERNAME } from '../constants';
 import { useLanguage } from '../i18n';
 
-const Typewriter = ({ text, delay = 100 }: { text: string; delay?: number }) => {
+const Typewriter = ({ text, delay = 100, startDelay = 0, onComplete }: { text: string; delay?: number; startDelay?: number; onComplete?: () => void }) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    // Reset when text changes (e.g. language change)
     setCurrentText('');
     setCurrentIndex(0);
-  }, [text]);
+    setStarted(false);
+    const t = setTimeout(() => setStarted(true), startDelay);
+    return () => clearTimeout(t);
+  }, [text, startDelay]);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
+    if (started && currentIndex < text.length) {
       const timeout = setTimeout(() => {
         setCurrentText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
       }, delay);
       return () => clearTimeout(timeout);
+    } else if (started && currentIndex === text.length && onComplete) {
+      onComplete();
     }
-  }, [currentIndex, delay, text]);
+  }, [currentIndex, delay, text, started, onComplete]);
 
   return <span>{currentText}</span>;
 };
 
 export default function Hero() {
   const { t, language } = useLanguage();
+  const [line1Complete, setLine1Complete] = useState(false);
 
-  const handleDownloadCV = async () => {
-    // Helper to convert image URL to base64
-    const getBase64FromUrl = async (url: string): Promise<string | null> => {
-      try {
-        const response = await fetch(url, { mode: 'cors' });
-        const blob = await response.blob();
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.readAsDataURL(blob);
-        });
-      } catch (e) {
-        console.error('Base64 conversion failed:', e);
-        return null;
-      }
-    };
+  useEffect(() => {
+    setLine1Complete(false);
+  }, [language]);
 
-    const proxyImageUrl = `https://images.weserv.nl/?url=github.com/${GITHUB_USERNAME}.png&w=200&h=200&fit=cover&default=identicon`;
-    const base64Image = await getBase64FromUrl(proxyImageUrl);
-
-    const html2pdf = (await import('html2pdf.js')).default;
-    
-    // Construct a simplified but more polished HTML content for the CV
-    const cvHtml = `
-      <div style="font-family: 'Helvetica', 'Arial', sans-serif; color: #1e293b; padding: 40px 50px; line-height: 1.5; background: white;">
-        <!-- Header with Photo -->
-        <div style="display: flex; align-items: center; gap: 24px; border-bottom: 2px solid #6366f1; padding-bottom: 24px; margin-bottom: 32px;">
-          ${base64Image ? `<img src="${base64Image}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #eef2ff;" />` : ''}
-          <div>
-            <h1 style="font-size: 32px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1;">Pedro Chaves</h1>
-            <p style="font-size: 18px; font-weight: 600; color: #4f46e5; margin: 6px 0 0 0;">Technical Lead</p>
-            <div style="display: flex; gap: 16px; font-size: 12px; color: #64748b; margin-top: 8px;">
-              <span>${t('hero_location')}</span>
-              <span>•</span>
-              <span>pedrochaves86@gmail.com</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Summary Section -->
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 12px;">Summary</h2>
-          <p style="font-size: 13px; color: #334155; text-align: justify; margin: 0;">
-            ${t('hero_desc')} ${t('about_me_p1')}
-          </p>
-        </div>
-
-        <!-- Experience Section with Timeline -->
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 20px;">Experience</h2>
-          
-          <div style="position: relative; padding-left: 24px; border-left: 2px solid #f1f5f9;">
-            <!-- EDP Role -->
-            <div style="position: relative; margin-bottom: 28px;">
-              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #6366f1; border-radius: 50%; border: 3px solid white;"></div>
-              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Technical Lead @ EDP</h3>
-                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_sep')} 2021 - ${t('exp_present')}</span>
-              </div>
-              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_edp')}</p>
-              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
-                ${['Angular', 'TypeScript', 'Java', 'PHP', 'GCP', 'SonarQube', 'Robot Framework'].map(skill => `
-                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- Natixis Role -->
-            <div style="position: relative; margin-bottom: 28px;">
-              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; border: 3px solid white;"></div>
-              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Angular Developer @ Natixis</h3>
-                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_aug')} 2019 - ${t('exp_jul')} 2021</span>
-              </div>
-              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_natixis')}</p>
-              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
-                ${['Angular', 'TypeScript', 'SCSS', 'Jasmine', 'SonarQube', 'Bitbucket'].map(skill => `
-                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- PMA Role -->
-            <div style="position: relative; margin-bottom: 0;">
-              <div style="position: absolute; left: -31px; top: 4px; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; border: 3px solid white;"></div>
-              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-                <h3 style="font-size: 14px; margin: 0; color: #0f172a; font-weight: 700;">Laravel Developer | IT Manager @ PMA</h3>
-                <span style="font-size: 11px; color: #64748b; font-weight: 600;">${t('exp_jun')} 2016 - ${t('exp_apr')} 2019</span>
-              </div>
-              <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.4;">${t('desc_pmacores')}</p>
-              <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;">
-                ${['Laravel', 'PHP', 'MySQL', 'SQL', 'System Administration'].map(skill => `
-                  <span style="display: inline-block; background: #f8fafc; color: #6366f1; font-size: 10px; font-weight: 700; padding: 0 10px; border-radius: 4px; border: 1px solid #e2e8f0; margin-right: 4px; margin-bottom: 4px; text-align: center; line-height: 22px; height: 22px; vertical-align: middle;">${skill}</span>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skills Section -->
-        <div style="margin-bottom: 32px;">
-          <h2 style="font-size: 16px; font-weight: 700; color: #0f172a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 16px;">Core Skills</h2>
-          <div style="display: block; margin-right: -4px;">
-            ${['Technical Leadership', 'Software Architecture', 'Angular', 'GCP', 'Java', 'PHP', 'Clean Code', 'CI/CD'].map(skill => `
-              <div style="display: inline-block; background-color: #f1f5f9; color: #475569; font-size: 11px; font-weight: 700; padding: 0 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-right: 8px; margin-bottom: 8px; text-align: center; line-height: 26px; height: 26px; vertical-align: middle;">${skill}</div>
-            `).join('')}
-          </div>
-        </div>
-
-        <div style="margin-top: auto; padding-top: 40px; text-align: center;">
-          <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 8px;">
-            <span style="color: #64748b; font-size: 10px; font-weight: 600;">linkedin.com/in/pedrochaves86</span>
-            <span style="color: #64748b; font-size: 10px; font-weight: 600;">github.com/pedrochaves86</span>
-          </div>
-          <p style="color: #94a3b8; font-size: 9px; margin: 0;">${language === 'pt' ? 'Documento gerado digitalmente' : 'Digitally generated document'}</p>
-        </div>
-      </div>
-    `;
-
-    const opt = {
-      margin: 0,
-      filename: `Pedro_Chaves_CV_${language.toUpperCase()}.pdf`,
-      image: { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const }
-    };
-    
-    try {
-      await html2pdf().from(cvHtml).set(opt).save();
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    }
+  const handleDownloadCV = () => {
+    const fileName = language === 'pt' ? 'Pedro_Chaves_CV_PT.pdf' : 'Pedro_Chaves_CV_EN.pdf';
+    const link = document.createElement('a');
+    link.href = `/${fileName}`;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -173,10 +59,22 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-              <span className="text-accent underline decoration-indigo-200 underline-offset-8">
-                <Typewriter text={t('hero_title_accent')} delay={100} />
-                <span className="animate-pulse">|</span>
-              </span>.
+              <Typewriter 
+                text={t('hero_title_main')} 
+                delay={80} 
+                onComplete={() => setLine1Complete(true)} 
+              />
+              <br />
+              {line1Complete && (
+                <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight">
+                  <Typewriter 
+                    text={t('hero_title_accent')} 
+                    delay={80} 
+                  />
+                  <span className="animate-pulse">|</span>
+                </span>
+              )}
+              {!line1Complete && <span className="animate-pulse">|</span>}
             </h1>
           </motion.div>
           

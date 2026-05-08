@@ -27,7 +27,6 @@ export default function Header() {
           <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold text-[10px] shadow-lg shadow-indigo-100 uppercase tracking-tighter">
             PC
           </div>
-          <span className="text-lg font-bold tracking-tight text-slate-900 hidden sm:block">Pedro Chaves</span>
         </motion.div>
 
         {/* Desktop Nav */}

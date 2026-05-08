@@ -17,7 +17,7 @@ const translations: Translations = {
   status_available: { en: 'Available for tech leadership & strategic roles', pt: 'Disponível para liderança técnica e funções estratégicas' },
   
   // Hero
-  hero_title_main: { en: '', pt: '' },
+  hero_title_main: { en: 'Pedro Chaves', pt: 'Pedro Chaves' },
   hero_title_accent: { en: 'Technical Lead', pt: 'Technical Lead' },
   hero_desc: { en: 'Leading engineering teams and architecture for business-critical applications. Specialized in Angular, Java, PHP & Cloud (GCP) with a focus on software quality and technical sustainability.', pt: 'Liderança de equipas de engenharia e arquitetura para aplicações críticas de negócio. Especialista em Angular, Java, PHP e Cloud (GCP) com foco na qualidade de software e sustentabilidade técnica.' },
   hero_cta_portfolio: { en: 'View Portfolio', pt: 'Ver Portfólio' },
