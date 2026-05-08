@@ -6,7 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/',
+    base: '/cv/',
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.APP_URL': JSON.stringify(env.APP_URL),
