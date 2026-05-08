@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Mulish", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Mulish", ui-sans-serif, system-ui, sans-serif;
 
   --color-paper: #f8fafc;
   --color-ink: #1e293b;
@@ -19,6 +19,22 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight text-slate-900;
   }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+.section-title {
+  @apply text-3xl md:text-5xl font-extrabold leading-tight;
+}
+
+.body-text {
+  @apply text-base md:text-lg text-slate-600 font-medium;
+}
+
+.hero-description {
+  @apply text-lg md:text-xl text-slate-500 font-medium;
 }
 
 .card {

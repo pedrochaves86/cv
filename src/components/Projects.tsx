@@ -43,16 +43,16 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6 bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-10 border-b border-slate-200 pb-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 border-b border-slate-200 pb-8 gap-4">
           <div>
-            <span className="section-label">{t('portfolio_label')}</span>
-            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">{t('portfolio_title')}</h2>
+            <span className="section-label mb-4 block">{t('portfolio_label')}</span>
+            <h2 className="section-title text-slate-900 tracking-tight">{t('portfolio_title')}</h2>
           </div>
           <a 
             href={`https://github.com/${GITHUB_USERNAME}`} 
             target="_blank" 
             rel="referrer"
-            className="text-xs text-accent font-bold hover:underline"
+            className="text-xs text-accent font-bold hover:underline mb-1"
           >
             github.com/{GITHUB_USERNAME}
           </a>
@@ -78,7 +78,7 @@ export default function Projects() {
                     </h4>
                 </div>
                 
-                <p className="text-xs text-slate-500 mb-6 line-clamp-3 min-h-[3.75rem] leading-relaxed font-medium">
+                <p className="text-xs text-slate-500 mb-6 line-clamp-3 min-h-[3.75rem] leading-relaxed font-medium text-justify">
                     {repo.description || t('portfolio_default_desc')}
                 </p>
 

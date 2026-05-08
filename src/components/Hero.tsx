@@ -81,7 +81,7 @@ export default function Hero() {
             </h1>
           </motion.div>
           
-          <p className="text-lg md:text-xl text-slate-500 max-w-2xl leading-relaxed">
+          <p className="hero-description max-w-2xl text-justify">
             {t('hero_desc')}
           </p>
           

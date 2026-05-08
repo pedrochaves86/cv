@@ -15,11 +15,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-20">
           <div>
             <span className="section-label">{t('contact_label')}</span>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 leading-tight">
+            <h2 className="section-title text-slate-900 mb-8">
                 {t('contact_title_1')} <br />
                 <span className="text-accent">{t('contact_title_2')}</span>
             </h2>
-            <p className="text-lg text-slate-500 max-w-md leading-relaxed">
+            <p className="hero-description max-w-md text-justify">
               {t('contact_desc')}
             </p>
           </div>
@@ -27,18 +27,18 @@ export default function Footer() {
           <div className="space-y-4">
             <a 
               href="mailto:pedrochaves86@gmail.com" 
-              className="group flex items-center justify-between p-8 bg-slate-50 border border-slate-100 rounded-3xl hover:bg-white hover:border-accent hover:shadow-xl hover:shadow-indigo-50 transition-all"
+              className="group flex flex-col sm:flex-row items-center sm:justify-between p-6 sm:p-8 bg-slate-50 border border-slate-100 rounded-3xl hover:bg-white hover:border-accent hover:shadow-xl hover:shadow-indigo-50 transition-all gap-4 sm:gap-6"
             >
-              <div className="flex items-center gap-6">
-                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center text-white shadow-lg shadow-indigo-100">
-                  <Mail size={24} />
+              <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent flex items-center justify-center text-white shadow-lg shadow-indigo-100 shrink-0">
+                  <Mail size={20} className="sm:w-6 sm:h-6" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[10px] font-bold uppercase tracking-widest block mb-1 text-slate-400">{t('contact_direct_email')}</span>
-                  <span className="text-xl font-bold text-slate-900">pedrochaves86@gmail.com</span>
+                  <span className="text-base sm:text-xl font-bold text-slate-900 block truncate">pedrochaves86@gmail.com</span>
                 </div>
               </div>
-              <ArrowRight className="text-slate-300 group-hover:text-accent transition-colors" />
+              <ArrowRight className="text-slate-300 group-hover:text-accent transition-colors hidden sm:block shrink-0" />
             </a>
 
             <div className="grid grid-cols-2 gap-4">
@@ -66,7 +66,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-slate-100 gap-8">
           <div className="text-[10px] uppercase tracking-[0.25em] font-bold text-slate-400">
-            &copy; {new Date().getFullYear()} PEDRO CHAVES &bull; SENIOR DEVELOPER &bull; AZORES
+            &copy; {new Date().getFullYear()} PEDRO CHAVES &bull; AZORES
           </div>
           
           <motion.button

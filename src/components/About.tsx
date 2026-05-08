@@ -24,12 +24,12 @@ export default function About() {
             viewport={{ once: true }}
           >
             <span className="section-label">{t('exp_label')}</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
+            <h2 className="section-title text-slate-900 mb-8">
                 {t('exp_title_main')} <br />
                 <span className="text-accent underline decoration-indigo-200 underline-offset-4">{t('exp_title_accent')}</span>
             </h2>
             
-            <div className="space-y-6 text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
+            <div className="space-y-6 body-text max-w-2xl text-justify">
               <p>
                 {t('exp_p1')}
               </p>

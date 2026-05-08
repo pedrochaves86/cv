@@ -18,14 +18,14 @@ export default function AboutMe() {
           >
             <div className="relative z-10">
               <span className="section-label mb-6">{t('about_me_label')}</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-8 leading-tight">
+              <h2 className="section-title text-slate-900 mb-8">
                 {t('about_me_title')} <br />
                 <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight">{t('about_me_stack')}</span>
               </h2>
               
               <div className="p-8 bg-slate-50 rounded-3xl border border-slate-100 relative overflow-hidden group">
                 <Quote className="absolute -top-4 -right-4 w-24 h-24 text-slate-200/50 group-hover:text-accent/10 transition-colors" />
-                <p className="text-slate-600 italic relative z-10 leading-relaxed">
+                <p className="text-slate-600 italic relative z-10 leading-relaxed text-justify">
                   {t('about_me_quote')}
                 </p>
                 <div className="mt-4 flex items-center gap-3">
@@ -46,7 +46,7 @@ export default function AboutMe() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-7"
           >
-            <div className="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed text-justify">
+            <div className="space-y-6 text-justify body-text">
               <p>
                 {t('about_me_p1')}
               </p>
