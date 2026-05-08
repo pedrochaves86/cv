@@ -41,9 +41,11 @@ export default function Hero() {
   }, [language]);
 
   const handleDownloadCV = () => {
-    const fileName = language === 'pt' ? 'Pedro_Chaves_CV_PT.pdf' : 'Pedro_Chaves_CV_EN.pdf';
+    const fileName = language === 'pt-pt' ? 'Pedro_Chaves_CV_PT.pdf' : 'Pedro_Chaves_CV_EN.pdf';
     const link = document.createElement('a');
-    link.href = `/${fileName}`;
+    // Ensure we use the correct base path for the environment
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    link.href = `${baseUrl}${fileName}`;
     link.download = fileName;
     document.body.appendChild(link);
     link.click();

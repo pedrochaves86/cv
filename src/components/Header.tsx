@@ -46,17 +46,17 @@ export default function Header() {
           <div className="flex items-center gap-3 pl-8 border-l border-slate-200">
             <div className="flex items-center bg-slate-100 p-1 rounded-full mr-2">
               <button
-                onClick={() => setLanguage('en')}
+                onClick={() => setLanguage('en-us')}
                 className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all ${
-                  language === 'en' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
+                  language === 'en-us' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 EN
               </button>
               <button
-                onClick={() => setLanguage('pt')}
+                onClick={() => setLanguage('pt-pt')}
                 className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all ${
-                  language === 'pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
+                  language === 'pt-pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 PT
@@ -109,17 +109,17 @@ export default function Header() {
           <div className="flex flex-col gap-4 pt-4 border-t border-slate-100">
             <div className="flex items-center bg-slate-100 p-1 rounded-xl w-fit">
               <button
-                onClick={() => setLanguage('en')}
+                onClick={() => setLanguage('en-us')}
                 className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${
-                  language === 'en' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
+                  language === 'en-us' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
                 }`}
               >
                 English
               </button>
               <button
-                onClick={() => setLanguage('pt')}
+                onClick={() => setLanguage('pt-pt')}
                 className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${
-                  language === 'pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
+                  language === 'pt-pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
                 }`}
               >
                 Português
