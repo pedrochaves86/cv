@@ -58,15 +58,17 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-              <Typewriter 
-                text={t('hero_title_main')} 
-                delay={80} 
-                onComplete={() => setLine1Complete(true)} 
-              />
-              <br />
+            <h1 className="font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+              <span className="text-5xl md:text-7xl block">
+                <Typewriter 
+                  text={t('hero_title_main')} 
+                  delay={80} 
+                  onComplete={() => setLine1Complete(true)} 
+                />
+                {!line1Complete && <span className="animate-pulse">|</span>}
+              </span>
               {line1Complete && (
-                <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight">
+                <span className="text-accent underline decoration-indigo-100 underline-offset-4 tracking-tight text-3xl md:text-5xl block mt-4">
                   <Typewriter 
                     text={t('hero_title_accent')} 
                     delay={80} 
@@ -74,7 +76,6 @@ export default function Hero() {
                   <span className="animate-pulse">|</span>
                 </span>
               )}
-              {!line1Complete && <span className="animate-pulse">|</span>}
             </h1>
           </motion.div>
           
