@@ -52,7 +52,7 @@ export default function Projects() {
             href={`https://github.com/${GITHUB_USERNAME}`} 
             target="_blank" 
             rel="referrer"
-            className="text-xs text-accent font-bold hover:underline mb-1"
+            className="text-xs text-accent font-bold hover:underline mb-1 cursor-pointer"
           >
             github.com/{GITHUB_USERNAME}
           </a>
@@ -69,7 +69,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="card p-6 flex flex-col group"
+                className="card p-6 flex flex-col group cursor-pointer"
             >
                 <div className="flex items-center gap-3 mb-4">
                     <Folder size={18} className="text-slate-400 group-hover:text-accent transition-colors shrink-0" />

@@ -89,7 +89,7 @@ export default function Hero() {
             <motion.a 
               href="#projects"
               whileHover={{ y: -2 }}
-              className="px-8 py-3.5 bg-accent text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all"
+              className="px-8 py-3.5 bg-accent text-white rounded-full font-bold flex items-center gap-2 shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all cursor-pointer"
             >
               {t('hero_cta_portfolio')}
               <ArrowRight size={18} />
@@ -130,7 +130,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
-            className="absolute -bottom-4 -right-2 p-3.5 bg-white rounded-2xl shadow-2xl border border-slate-100 hidden sm:block hover:border-accent/20 transition-all"
+            className="absolute -bottom-4 -right-2 p-3.5 bg-white rounded-2xl shadow-2xl border border-slate-100 hidden sm:block hover:border-accent/20 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-3">
                 <div className="flex -space-x-1.5">

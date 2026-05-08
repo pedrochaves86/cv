@@ -27,7 +27,7 @@ export default function Footer() {
           <div className="space-y-4">
             <a 
               href="mailto:pedrochaves86@gmail.com" 
-              className="group flex flex-col sm:flex-row items-center sm:justify-between p-6 sm:p-8 bg-slate-50 border border-slate-100 rounded-3xl hover:bg-white hover:border-accent hover:shadow-xl hover:shadow-indigo-50 transition-all gap-4 sm:gap-6"
+              className="group flex flex-col sm:flex-row items-center sm:justify-between p-6 sm:p-8 bg-slate-50 border border-slate-100 rounded-3xl hover:bg-white hover:border-accent hover:shadow-xl hover:shadow-indigo-50 transition-all gap-4 sm:gap-6 cursor-pointer"
             >
               <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-accent flex items-center justify-center text-white shadow-lg shadow-indigo-100 shrink-0">
@@ -46,7 +46,7 @@ export default function Footer() {
                     href={LINKEDIN_URL} 
                     target="_blank" 
                     rel="referrer"
-                    className="flex items-center gap-4 p-6 bg-white border border-slate-200 rounded-2xl hover:border-accent group transition-all"
+                    className="flex items-center gap-4 p-6 bg-white border border-slate-200 rounded-2xl hover:border-accent group transition-all cursor-pointer"
                 >
                     <Linkedin size={20} className="text-slate-400 group-hover:text-accent transition-colors" />
                     <span className="text-[11px] font-bold uppercase tracking-widest text-slate-900">LinkedIn</span>
@@ -55,7 +55,7 @@ export default function Footer() {
                     href={GITHUB_URL} 
                     target="_blank" 
                     rel="referrer"
-                    className="flex items-center gap-4 p-6 bg-white border border-slate-200 rounded-2xl hover:border-accent group transition-all"
+                    className="flex items-center gap-4 p-6 bg-white border border-slate-200 rounded-2xl hover:border-accent group transition-all cursor-pointer"
                 >
                     <Github size={20} className="text-slate-400 group-hover:text-accent transition-colors" />
                     <span className="text-[11px] font-bold uppercase tracking-widest text-slate-900">GitHub</span>
@@ -72,7 +72,7 @@ export default function Footer() {
           <motion.button
             whileHover={{ y: -5 }}
             onClick={scrollToTop}
-            className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-slate-900"
+            className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-slate-900 cursor-pointer"
           >
             {t('contact_back_top')}
             <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-accent">

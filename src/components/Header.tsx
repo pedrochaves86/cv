@@ -36,7 +36,7 @@ export default function Header() {
               <a
                 key={item.name}
                 href={item.href}
-                className="hover:text-accent transition-colors py-2"
+                className="hover:text-accent transition-colors py-2 cursor-pointer"
               >
                 {item.name}
               </a>
@@ -47,7 +47,7 @@ export default function Header() {
             <div className="flex items-center bg-slate-100 p-1 rounded-full mr-2">
               <button
                 onClick={() => setLanguage('en-us')}
-                className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all ${
+                className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all cursor-pointer ${
                   language === 'en-us' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
@@ -55,7 +55,7 @@ export default function Header() {
               </button>
               <button
                 onClick={() => setLanguage('pt-pt')}
-                className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all ${
+                className={`px-3 py-1 text-[10px] font-bold rounded-full transition-all cursor-pointer ${
                   language === 'pt-pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
@@ -84,7 +84,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden p-2 text-slate-600" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden p-2 text-slate-600 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -101,7 +101,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="block text-sm font-bold text-slate-600 hover:text-accent transition-colors py-2"
+              className="block text-sm font-bold text-slate-600 hover:text-accent transition-colors py-2 cursor-pointer"
             >
               {item.name}
             </a>
@@ -110,7 +110,7 @@ export default function Header() {
             <div className="flex items-center bg-slate-100 p-1 rounded-xl w-fit">
               <button
                 onClick={() => setLanguage('en-us')}
-                className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                   language === 'en-us' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
                 }`}
               >
@@ -118,7 +118,7 @@ export default function Header() {
               </button>
               <button
                 onClick={() => setLanguage('pt-pt')}
-                className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                   language === 'pt-pt' ? 'bg-white text-accent shadow-sm' : 'text-slate-400'
                 }`}
               >
@@ -126,10 +126,10 @@ export default function Header() {
               </button>
             </div>
             <div className="flex flex-col gap-3">
-                <a href={GITHUB_URL} target="_blank" rel="referrer" className="flex items-center gap-3 text-sm font-medium text-slate-600">
+                <a href={GITHUB_URL} target="_blank" rel="referrer" className="flex items-center gap-3 text-sm font-medium text-slate-600 cursor-pointer">
                   <Github size={18} /> GitHub
                 </a>
-                <a href={LINKEDIN_URL} target="_blank" rel="referrer" className="flex items-center gap-3 text-sm font-medium text-slate-600">
+                <a href={LINKEDIN_URL} target="_blank" rel="referrer" className="flex items-center gap-3 text-sm font-medium text-slate-600 cursor-pointer">
                   <Linkedin size={18} /> LinkedIn
                 </a>
             </div>
